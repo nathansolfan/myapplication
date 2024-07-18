@@ -1,5 +1,10 @@
 <x-layout>
-    <h1>Hello</h1>
+    <h1>Hello, welcome page</h1>
 
-    <x-demo />
+    <x-test2>
+    </x-test2>
+
+
+
+   
 </x-layout>
