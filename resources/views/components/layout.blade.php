@@ -33,7 +33,8 @@
                 {{--use the route to dashboard  --}}
                 <a href="{{ route('dashboard')}}" class="block hover:bg-slate-100 pl-6 pr-8 py-2 mb-1">Dashboard</a>
 
-                <form action="" method="post">
+                {{-- layout > route > controller --}}
+                <form action="{{ route('logout')}}" method="post">
                     @csrf
                     <button class="block hover:bg-slate-100 pl-6 pr-8 py-2 mb-1">Logout</button>
                 </form>
