@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'posts.index')->name('home');
 
-
+// REGISTER
 Route::view('/register', 'auth.register')->name('register');
 // need to import!!
 Route::post('/register', [AuthController::class, 'register']);
+
+// LOGIN
+Route::view('/login', 'auth.login')->name('login');
