@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            // table is an instance of the Blueprint
+            $table->string('title');
+            $table->text('body');
+            // the 2 tables for the POSTs: title and body
+            // to actually create - php artisan migrate
             $table->timestamps();
         });
     }
