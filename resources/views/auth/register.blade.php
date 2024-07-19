@@ -1,5 +1,5 @@
 <x-layout>
-    
+
     <h1>Register new User</h1>
 
     <x-test2>
@@ -17,6 +17,11 @@
         <div class="mb-4">
             <label for="username">Username</label>
             <input type="text" name="username" class="input">
+            @error('username')
+            {{-- i have access to $message with laravel --}}
+            {{$message}}
+
+            @enderror
         </div>
 
         {{-- EMAIL --}}

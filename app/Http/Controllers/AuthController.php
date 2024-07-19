@@ -8,8 +8,15 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     // after creating the route in web.php
-    public function register()
+    // Request $request creates an instance
+    // To get a DATE from the form ($request->username) ex: dd($request->username);
+    public function register(Request $request)
     {
-        dd('ok');
+        // VALIDATE
+        $request->validate([
+            'username' => ['required','max:255'],
+            'email' => ['required','max:255', 'email'],
+            'password' => ['required','max:255', 'confirmed'],
+        ]);
     }
 }
