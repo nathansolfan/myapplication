@@ -50,8 +50,8 @@ class AuthController extends Controller
 
         // TRY TO LOG - attempt() method
        if(Auth::attempt($fields, $request->remember)) {
-        // redirect home if ok
-        return redirect()->route('home');
+        // redirect home if ok. route('home');
+        return redirect()->intended();
        } else {
         return back()->withErrors([
             'failed' => 'The provied credentials don`t match - AuthController by me'
