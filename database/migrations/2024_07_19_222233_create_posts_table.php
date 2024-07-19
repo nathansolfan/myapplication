@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            // field to show the post belongs to user_id (convention)
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             // table is an instance of the Blueprint
             $table->string('title');
             $table->text('body');
