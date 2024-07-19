@@ -1,6 +1,5 @@
  <x-layout>
-
- @auth()
+    @auth()
     <h1>Hello, welcome page</h1>
     {{-- <p>{{ route('register')}}</p> --}}
     @endauth
@@ -10,4 +9,6 @@
     @endguest
     <x-test2>
     </x-test2>
+
+    <h1 class="title" >Lastests Posts:</h1>
 </x-layout>

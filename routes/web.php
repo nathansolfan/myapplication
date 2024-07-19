@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 // They are the same
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::view('/', 'posts.index')->name('home');
+
+// php artisan route:list - connects to the PostController routes
+Route::resource('posts', PostController::class);
+
+
+
+
+
+
+
 
 // AUTH GROUP
 Route::middleware('auth')->group(function() {
