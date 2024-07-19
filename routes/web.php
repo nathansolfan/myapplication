@@ -21,3 +21,4 @@ Route::post('/register', [AuthController::class, 'register']);
 
 // LOGIN
 Route::view('/login', 'auth.login')->name('login');
+Route::post('/login', [AuthController::class, 'login']);

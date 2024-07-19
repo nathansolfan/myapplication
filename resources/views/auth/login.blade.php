@@ -12,11 +12,6 @@
         {{-- security code, mandatory --}}
         @csrf
 
-
-
-
-
-
         {{-- EMAIL --}}
         <div class="mb-4">
             <label for="email">Email</label>
@@ -30,8 +25,6 @@
         @enderror
 
 
-
-
         {{-- PASSWORD --}}
         <div class="mb-4">
             <label for="password">Password</label>
@@ -40,6 +33,19 @@
 
         {{-- PW ERROR --}}
         @error('password')
+            {{-- i have access to $message with laravel --}}
+            <p class="error"> {{$message}}</p>
+            @enderror
+
+
+        {{-- REMEMBER CHECKBOX --}}
+        <div class="mb-4">
+            <input type="checkbox" name="remember" id="remember" >
+            <label for="remember">Remember me</label>
+        </div>
+
+        {{-- from try to login in AuthController --}}
+        @error('failed')
             {{-- i have access to $message with laravel --}}
             <p class="error"> {{$message}}</p>
             @enderror
