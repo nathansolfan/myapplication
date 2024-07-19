@@ -16,25 +16,44 @@
         {{-- USERNAME --}}
         <div class="mb-4">
             <label for="username">Username</label>
-            <input type="text" name="username" class="input">
+            <input type="text" name="username" class="input @error('username')!ring-red-500 @enderror">
+
+            {{-- USERNAME ERROR --}}
             @error('username')
             {{-- i have access to $message with laravel --}}
-            {{$message}}
-
+            <p class="error"> {{$message}}</p>
             @enderror
         </div>
+
+
 
         {{-- EMAIL --}}
         <div class="mb-4">
             <label for="email">Email</label>
-            <input type="text" name="email" class="input">
+            <input type="text" name="email" class="input @error('email')!ring-red-500 @enderror"  >
         </div>
+
+        {{-- EMAIL ERROR --}}
+        @error('email')
+            {{-- i have access to $message with laravel --}}
+            <p class="error"> {{$message}}</p>
+        @enderror
+
+
+
 
         {{-- PASSWORD --}}
         <div class="mb-4">
             <label for="password">Password</label>
-            <input type="text" name="password" class="input">
+            <input type="text" name="password" class="input @error('password')!ring-red-500 @enderror">
         </div>
+
+        {{-- PW ERROR --}}
+        @error('password')
+            {{-- i have access to $message with laravel --}}
+            <p class="error"> {{$message}}</p>
+            @enderror
+
 
         {{-- CONFIRM PASSWORD use _confirmation for laravel special rule--}}
         <div class="mb-8">
