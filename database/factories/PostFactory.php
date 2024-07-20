@@ -16,8 +16,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        // user this factory to seed the database - title and body are fake()
         return [
             //
+            'user_id' => 1,
+            'title' => fake()->sentence(),
+            'body' => fake()->paragraph(20),
         ];
     }
 }

@@ -15,7 +15,8 @@
     <header class="bg-slate-800 shadow-lg">
 
         <nav>
-            <a href="{{route('home')}}" class="nav-link">Home</a>
+            {{-- change from home as it doesnt exist, use route:list--}}
+            <a href="{{route('posts.index')}}" class="nav-link">Home</a>
 
 
             @auth

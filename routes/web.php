@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('auth.register');
 
 
-
-Route::view('/', 'posts.index')->name('home');
+// Route::view('/', 'posts.index')->name('home');
+Route::redirect('/', 'posts');
 
 // php artisan route:list - connects to the PostController routes
 Route::resource('posts', PostController::class);
