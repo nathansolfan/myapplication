@@ -13,8 +13,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        return view('posts.index');
+
+        $posts = Post::all();
+
+
+        // to send data to the view,2nd para DATA ARRAY and will be grabbed in blade
+        // ['name' =>'john']
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
