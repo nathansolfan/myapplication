@@ -14,7 +14,8 @@ class PostController extends Controller
     public function index()
     {
 
-        $posts = Post::all();
+        // check Eloquent Models in docs
+        $posts = Post::orderBy('created_at','desc')->get();
 
 
         // to send data to the view,2nd para DATA ARRAY and will be grabbed in blade

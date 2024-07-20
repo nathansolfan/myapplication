@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         // will create 10 users based on UserFactory, no need of it
 
-        Post::factory(15)->create();
+        Post::factory(2)->create();
     }
 }
