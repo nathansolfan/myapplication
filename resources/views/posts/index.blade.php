@@ -11,6 +11,11 @@
     </x-test2>
 
     <h1 class="title" >Lastests Posts:</h1>
+
+
+    <div class="grid grid-cols-2 gap-6">
+
+
     {{-- from PostController ['name' =>'john'] {{ $posts }} - this dont work on array --}}
     @foreach ( $posts as $post )
     <div class="card">
@@ -29,10 +34,14 @@
             {{-- Str:words shows the first 15words --}}
             <p> {{  Str::words($post->body, 15) }} </p>
         </div>
-
     </div>
-
-
-
     @endforeach
+</div>
+
+<div>
+    <p> {{$posts->links()}} </p>
+
+</div>
+
+
 </x-layout>

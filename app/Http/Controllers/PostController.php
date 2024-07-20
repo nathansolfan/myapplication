@@ -15,7 +15,8 @@ class PostController extends Controller
     {
 
         // check Eloquent Models in docs
-        $posts = Post::orderBy('created_at','desc')->get();
+        // $posts = Post::orderBy('created_at','desc')->get()   get can be changed to paginate
+        $posts = Post::latest()->paginate(6);
 
 
         // to send data to the view,2nd para DATA ARRAY and will be grabbed in blade
