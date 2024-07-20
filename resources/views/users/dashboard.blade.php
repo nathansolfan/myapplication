@@ -2,14 +2,19 @@
 
     <h1> Hello {{ auth()->user()->username }} this is the dashboard</h1>
 
+
+
+
     {{-- CREATE FORM POST --}}
     <div class="card mb-4">
         <h2 class="font-bold mb-4">Create a new Post</h2>
 
+
         {{-- SESSION, from the with() method, pass the KEY--}}
         @if (session('success'))
-        <div>
-            <p> {{ session('success') }} </p>
+        <div class="mb-2">
+            <x-flashMsg msg="{{ session('success') }}"
+            />
         </div>
         @endif
 
