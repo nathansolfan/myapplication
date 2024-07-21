@@ -40,7 +40,12 @@ class DashboardController extends Controller
             // grab user`s post
             $userPosts = $user->posts()->latest()->paginate(6);
 
-            return view('users.posts', [ 'posts' => $userPosts]);
+            return view('users.posts', [
+                'posts' => $userPosts,
+                // create the 'user' and use it on blade template
+                'user' => $user
+            ]);
+
         }
 
 

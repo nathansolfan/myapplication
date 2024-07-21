@@ -1,6 +1,7 @@
 <x-layout>
 
-    <h1 class="title">Username</h1>
+    {{-- $user->username to grab it --}}
+    <h1 class="title"> {{$user->username}} and has: {{$posts->total()}} posts</h1>
 
 
     {{-- next step is DashboardController - create posts(){view('users.dashboard') } --}}
