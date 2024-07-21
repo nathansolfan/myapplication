@@ -21,7 +21,8 @@ class DashboardController extends Controller
 
         // laravel eloquent model - check - posts without method() give a collection
         // posts() from  Illuminate/Database/Eloquent/Relations/HasMany
-        $posts = Auth::user()->posts;
+        // to chain other methods posts become posts()
+        $posts = Auth::user()->posts()->latest()->paginate(6);
 
         // dd($posts);
 

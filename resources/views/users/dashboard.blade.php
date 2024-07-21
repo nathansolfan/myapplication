@@ -66,24 +66,16 @@
 
         {{-- from DashboardController array - [ 'posts' => $posts ] --}}
         @foreach ( $posts as $post )
-        <div class="card">
 
-            {{-- TITLE --}}
-            <h2 class="font-bold text-xl"> {{ $post->title}} </h2>
-
-            {{-- AUTHOR and DATE diffForHumans() Carbon.com--}}
-            <div class="text-xs font-light mb-4">
-                <span>Posted {{ $post->created_at->diffForHumans()  }} </span>
-                <a href="" class="text-blue-500 font-medium">USERNAME:</a>
-            </div>
-
-            {{-- BODY --}}
-            <div class="text-xs">
-                {{-- Str:words shows the first 15words --}}
-                <p> {{  Str::words($post->body, 15) }} </p>
-            </div>
-        </div>
+        {{-- created the postCard.blade component and import it here--}}
+        {{-- @props ARRAY (['post'])  AND :post="$post" is how an OBJECT is passed--}}
+        <x-postCard :post="$post" />
         @endforeach
+    </div>
+
+    {{-- PAGINATION -  --}}
+    <div>
+        {{$posts->links()}}
     </div>
 
 
