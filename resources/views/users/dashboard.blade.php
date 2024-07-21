@@ -1,6 +1,8 @@
 <x-layout>
 
-    <h1> Hello {{ auth()->user()->username }} this is the dashboard</h1>
+    <h1 class="title"> Hello {{ auth()->user()->username }} this is the dashboard</h1>
+    {{-- $post variable and chain -> method to it --}}
+    <p>You have: {{$posts->total()}} posts </p>
 
 
 
@@ -69,9 +71,22 @@
 
         {{-- created the postCard.blade component and import it here--}}
         {{-- @props ARRAY (['post'])  AND :post="$post" is how an OBJECT is passed--}}
-        <x-postCard :post="$post" />
+        <x-postCard :post="$post">
+            {{-- DELETE button  Action, takes the route and a post parameter $post--}}
+            <form action=" {{route('posts.destroy', $post)}}" method="POST">
+                @csrf
+                <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
+            </form>
+
+
+
+
+
+        </x-postCard>
         @endforeach
     </div>
+
+
 
     {{-- PAGINATION -  --}}
     <div>
