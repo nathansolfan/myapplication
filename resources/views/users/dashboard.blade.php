@@ -14,10 +14,9 @@
 
         {{-- SESSION, from the with() method, pass the KEY--}}
         @if (session('success'))
-        <div class="mb-2">
-            <x-flashMsg msg="{{ session('success') }}"
-            />
-        </div>
+            <x-flashMsg msg="{{ session('success') }}"/>
+        @elseif (session('delete'))
+            <x-flashMsg msg="{{ session('delete')}}"  bg="bg-red-500"/>
         @endif
 
 
@@ -75,6 +74,8 @@
             {{-- DELETE button  Action, takes the route and a post parameter $post--}}
             <form action=" {{route('posts.destroy', $post)}}" method="POST">
                 @csrf
+                {{-- method:"POST" dont work and need the @method(if delete,put,patch) --}}
+                @method('DELETE')
                 <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
             </form>
 
