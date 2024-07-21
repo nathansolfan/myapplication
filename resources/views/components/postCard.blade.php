@@ -8,7 +8,10 @@
     {{-- AUTHOR and DATE diffForHumans() Carbon.com--}}
     <div class="text-xs font-light mb-4">
         <span>Posted {{ $post->created_at->diffForHumans()  }} </span>
-        <a href="" class="text-blue-500 font-medium">USERNAME:</a>
+        {{-- USERNAME relationship to $post, which is taken from the Model/Post user() method/relation --}}
+        {{-- route('') fron the ->name('posts.user') in Route folder, and if dinamic add a 2nd param--}}
+        {{-- $post->user gives user instance, and with () the relationship --}}
+        <a href=" {{ route('posts.user', $post->user )}} " class="text-blue-500 font-medium"> {{$post->user->username}}</a>
     </div>
 
     {{-- BODY --}}

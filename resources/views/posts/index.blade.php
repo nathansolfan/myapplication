@@ -14,7 +14,6 @@
 
 
 <div class="grid grid-cols-2 gap-6">
-
     {{-- from PostController ['name' =>'john'] {{ $posts }} - this dont work on array --}}
     @foreach ( $posts as $post )
     <x-postCard :post="$post" />
@@ -23,7 +22,6 @@
 
 <div>
     <p> {{$posts->links()}} </p>
-
 </div>
 
 

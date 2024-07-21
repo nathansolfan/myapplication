@@ -19,8 +19,9 @@ Route::redirect('/', 'posts');
 // php artisan route:list - connects to the PostController routes
 Route::resource('posts', PostController::class);
 
-
-
+// USERS POST Route - user/posts the path on the dashboard controller
+// keep in mind the user will be dinamic {}
+Route::get('{user}/posts', [DashboardController::class, 'userPosts'])->name('posts.user');
 
 
 
