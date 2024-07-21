@@ -63,7 +63,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        // view()/posts/show AND associative array
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
