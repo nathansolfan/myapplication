@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
+    // details can be seen on migration/create_post table
     protected $fillable = [
         'title',
         'body',

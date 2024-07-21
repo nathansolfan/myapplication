@@ -57,4 +57,34 @@
     </form>
     </div>
 
+    {{-- DISPLAY USER POSTS --}}
+    <h2 class="font-bold mb-4">Your lastests posts:</h2>
+
+
+
+    <div class="grid grid-cols-2 gap-6">
+
+        {{-- from DashboardController array - [ 'posts' => $posts ] --}}
+        @foreach ( $posts as $post )
+        <div class="card">
+
+            {{-- TITLE --}}
+            <h2 class="font-bold text-xl"> {{ $post->title}} </h2>
+
+            {{-- AUTHOR and DATE diffForHumans() Carbon.com--}}
+            <div class="text-xs font-light mb-4">
+                <span>Posted {{ $post->created_at->diffForHumans()  }} </span>
+                <a href="" class="text-blue-500 font-medium">USERNAME:</a>
+            </div>
+
+            {{-- BODY --}}
+            <div class="text-xs">
+                {{-- Str:words shows the first 15words --}}
+                <p> {{  Str::words($post->body, 15) }} </p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
+
 </x-layout>
