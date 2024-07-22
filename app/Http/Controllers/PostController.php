@@ -72,7 +72,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        // update button sends to post.edit
+        return view('posts.edit', ['post' => $post]);
+
+
 
     }
 
@@ -82,6 +85,15 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $fields = $request->validate([
+            'title' => ['required','max:255'],
+            'body' => ['required']
+        ]);
+        // Update POST - look for new array
+        $post->update($fields);
+
+        // change from back() to redirect()->dashboard()
+        return redirect()->dashboard('dashboard')->with('success','Your post was updated');
     }
 
     /**

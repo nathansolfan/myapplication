@@ -23,11 +23,13 @@
         {{-- PostController store() function responsible --}}
         <form action="{{ route('posts.store')}}" method="POST">
         @csrf
+        {{-- like delete or $user dont work --}}
+        @method('PUT')
 
         {{-- POST TITLE --}}
         <div class="mb-4">
             <label for="title">Post Title</label>
-            <input type="text" name="title" value="{{old('title')}}"
+            <input type="text" name="title" value="{{ old('title')}}"
             class="input @error('title')!ring-red-500 @enderror"
             >
         </div>
@@ -71,6 +73,11 @@
         {{-- created the postCard.blade component and import it here--}}
         {{-- @props ARRAY (['post'])  AND :post="$post" is how an OBJECT is passed--}}
         <x-postCard :post="$post">
+
+            {{-- UPDATE --}}
+            <a class="bg-green-500 text-white px-2 py-1 text-xs rounded-md" href=" {{route('posts.edit', $post)}}">Update</a>
+
+
             {{-- DELETE button  Action, takes the route and a post parameter $post--}}
             <form action=" {{route('posts.destroy', $post)}}" method="POST">
                 @csrf
