@@ -11,7 +11,6 @@
     <div class="card mb-4">
         <h2 class="font-bold mb-4">Create a new Post</h2>
 
-
         {{-- SESSION, from the with() method, pass the KEY--}}
         @if (session('success'))
             <x-flashMsg msg="{{ session('success') }}"/>
@@ -19,14 +18,13 @@
             <x-flashMsg msg="{{ session('delete')}}"  bg="bg-red-500"/>
         @endif
 
-
-        {{-- PostController store() function responsible --}}
-        <form action="{{ route('posts.store')}}" method="POST">
+        {{-- !FORM! PostController store() function responsible --}}
+        <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         {{-- like delete or $user dont work --}}
         @method('PUT')
 
-        {{-- POST TITLE --}}
+        {{-- TITLE POST  --}}
         <div class="mb-4">
             <label for="title">Post Title</label>
             <input type="text" name="title" value="{{ old('title')}}"
@@ -36,12 +34,12 @@
 
         {{-- TITLE ERROR --}}
         @error('title')
-            {{-- i have access to $message with laravel --}}
+            {{-- Have access to $message with laravel --}}
             <p class="error"> {{$message}}</p>
         @enderror
 
 
-        {{-- POST BODY --}}
+        {{-- BODY POST  --}}
         <div class="mb-4">
             <label for="body">Post Content</label>
             <textarea name="body" rows="4"
@@ -50,12 +48,21 @@
 
         {{-- BODY ERROR --}}
         @error('body')
-            {{-- Have access to $message with laravel --}}
             <p class="error"> {{$message}}</p>
         @enderror
         </div>
 
-        {{-- BUTTON --}}
+        {{-- POST IMAGE --}}
+        <div class="mb-4">
+            <label for="image">Cover photo</label>
+            <input type="file" name="image" id="image">
+        </div>
+
+        @error('image')
+            <p class="error"> {{$message}}</p>
+        @enderror
+
+        {{-- BUTTON SUBMIT --}}
         <button class="btn">Create</button>
     </form>
     </div>

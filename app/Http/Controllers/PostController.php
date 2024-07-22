@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -63,6 +64,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+
+        // 2min video 24
+        Gate::authorize('modify', $post);
         // view()/posts/show AND associative array
         return view('posts.show', ['post' => $post]);
     }
@@ -73,6 +77,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         // update button sends to post.edit
+        // edit renders the resource/views/posts path
+        // check if auth and owns the post - using Gate::
         return view('posts.edit', ['post' => $post]);
 
 
