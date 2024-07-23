@@ -8,6 +8,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * // data preparation for email verification
      */
     public function up(): void
     {
@@ -15,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('email')->unique();
-            // data preparation for email verification
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

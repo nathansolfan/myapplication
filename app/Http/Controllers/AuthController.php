@@ -44,11 +44,21 @@ class AuthController extends Controller
     }
 
      // email Verification Handler
-    public function verifyEmail(EmailVerificationRequest $request) {
+    public function verifyEmail(EmailVerificationRequest $request)
+    {
         $request->fulfill();
 
         return redirect()->route('dashboard');
     }
+
+    // Resending email verification Handler
+    public function verifyHandler(Request $request)
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', 'Verification link sent!');
+    }
+
 
 
     // LOGIN FUNCTION
@@ -59,7 +69,6 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // dd($request);
 
         // TRY TO LOG - attempt() method
        if(Auth::attempt($fields, $request->remember)) {
