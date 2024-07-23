@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -18,8 +19,10 @@ class WelcomeMail extends Mailable
 
     /**
      * Create a new message instance.
+     * To pass data to view - public User $USER
+     * Again with public Post, it can be used anywhere
      */
-    public function __construct(User $user, Post $post)
+    public function __construct(public User $user, public Post $post)
     {
         //
     }
@@ -30,7 +33,7 @@ class WelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome Mail',
+            subject: 'Welcome Mail to Laravel 11',
         );
     }
 

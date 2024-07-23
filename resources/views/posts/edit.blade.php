@@ -18,7 +18,7 @@
 
     {{-- PostController store() function responsible --}}
     {{-- $post is accepted in controller edit(Post $post), and pass it to the view --}}
-    <form action="{{ route('posts.update', $post)}}" method="POST">
+    <form action="{{ route('posts.update', $post)}}" method="POST" enctype="multipart/form-data">
     @csrf
     {{-- add method for PUT/PATCH/DELETE --}}
     @method('PUT')

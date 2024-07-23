@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeMail;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller implements HasMiddleware
@@ -27,6 +29,8 @@ class PostController extends Controller implements HasMiddleware
      */
     public function index()
     {
+
+
 
         // check Eloquent Models in docs
         // $posts = Post::orderBy('created_at','desc')->get()   get can be changed to paginate
@@ -59,6 +63,7 @@ class PostController extends Controller implements HasMiddleware
             'title' => ['required','max:255'],
             // if body => empty then it goes empty
             'body' => ['required'],
+            // validation for image
             'image' => ['nullable','file', 'max:5000', 'mimes:png,jpg,webp']
         ]);
 
@@ -77,11 +82,15 @@ class PostController extends Controller implements HasMiddleware
 
         // CREATE POST - create([]) instead of using [] the whole field can be used as a var
         // Post::create($fields);
-        Auth::user()->posts()->create([
+        $post = Auth::user()->posts()->create([
             'title' => $request->title,
             'body' => $request->body,
             'image' => $path
         ]);
+
+        //  SEnd Email, $post can be instanced from CREATE POST above
+        Mail::to(Auth::user())->send(new WelcomeMail(Auth::user(), $post));
+
 
         // REDIRECT with() is similar to withError() and takes key and value
         // will be grabbed in the view
@@ -125,15 +134,32 @@ class PostController extends Controller implements HasMiddleware
         Gate::authorize('modify', $post);
 
         // Validate
-        $fields = $request->validate([
+        $request->validate([
             'title' => ['required','max:255'],
-            'body' => ['required']
+            'body' => ['required'],
+            'image' => ['nullable','file', 'max:5000', 'mimes:png,jpg,webp']
         ]);
+
+        // Store image if exist - since this is a change, if user dont wanna change, keep $post->image
+        $path = $post->image ?? null;
+        if ($request->hasFile('image')) {
+            if ($post->image) {
+                // check if there is a picture and then delete
+                Storage::disk('public')->delete($post->image);
+            }
+            $path = Storage::disk('public')->put('posts_image', $request->image);
+            // dd($path);
+        }
+
         // Update POST - look for new array
-        $post->update($fields);
+        $post->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $path
+        ]);
 
         // change from back() to redirect()->dashboard()
-        return redirect()->dashboard('dashboard')->with('success','Your post was updated');
+        return redirect()->route('dashboard')->with('success','Your post was updated');
     }
 
     /**
