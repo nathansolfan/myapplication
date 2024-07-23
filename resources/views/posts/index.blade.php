@@ -12,6 +12,9 @@
 
     <h1 class="title" >Lastests Posts:</h1>
 
+    {{-- asset() goes inside the public folder --}}
+    <img src=" {{ asset('storage/posts_image/laTC95oZELiq9xJHDcti144X2B7ypbAVXKcIvSLf.jpg') }} " alt="">
+
 
 <div class="grid grid-cols-2 gap-6">
     {{-- from PostController ['name' =>'john'] {{ $posts }} - this dont work on array --}}

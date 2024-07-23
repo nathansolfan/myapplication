@@ -20,7 +20,6 @@
         <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         {{-- like delete or $user dont work --}}
-        {{-- @method('POST') --}}
 
         {{-- TITLE POST  --}}
         <div class="mb-4">

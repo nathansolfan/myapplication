@@ -8,6 +8,7 @@ use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller implements HasMiddleware
 {
@@ -49,18 +50,26 @@ class PostController extends Controller implements HasMiddleware
      * Store a newly created resource in storage.
      */
 
-    //  StorePostRequest: http/request folder
+    //  StorePostRequest: http/request folder / dd($request);
     public function store(Request $request)
     {
-        // Posts created at dashboard.blade.php - dd('ok')
-        // dd($request);
-
+        // Posts created at dashboard.blade.php
         // VALIDATE method, takes the array of the form
         $fields = $request->validate([
             'title' => ['required','max:255'],
             // if body => empty then it goes empty
-            'body' => ['required']
+            'body' => ['required'],
+            'image' => ['nullable','file', 'max:1000', 'mimes:png,jpg,webp']
         ]);
+
+        // Storage facade, saves into /storage.
+        // Add the put and by default goes to /app folder
+        // 1st argument is the name of the folder, to define the place/disk
+        // and to create a symbolic link use storage:link
+        // Store image if exist - add validation like 'image' => ['nullable'];
+        Storage::disk('public')->put('posts_image', $request->image);
+
+
 
         // CREATE POST - create([]) instead of using [] the whole field can be used as a var
         // Post::create($fields);
@@ -133,3 +142,8 @@ class PostController extends Controller implements HasMiddleware
 
     }
 }
+
+
+// from laravel/docs filestorage
+//    INFO  The [C:\Users\natha\Desktop\myapplication\public\storage] link has been connected to [C:\Users\natha\Desktop\myapplication\storage\app/public]
+//
