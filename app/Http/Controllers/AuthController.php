@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // Request is used to grab data
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,17 +26,28 @@ class AuthController extends Controller
             'password' => ['required','max:255', 'confirmed'],
         ]);
 
-        // dd($fields);
-
         // REGISTER - takes an array username => $request->username
         $user = User::create($fields);
 
         // LOGIN - use ::login method and the User, put it in a var
         Auth::login($user);
 
+        event(new Registered($user));
+
         // REDIRECT
         return redirect()->route('home');
-        // dd('ok');
+    }
+
+    // email Verify Notice handler
+    public function verifyNotice () {
+        return view('auth.verify-email');
+    }
+
+     // email Verification Handler
+    public function verifyEmail(EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect()->route('dashboard');
     }
 
 

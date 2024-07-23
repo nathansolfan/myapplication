@@ -25,15 +25,23 @@ Route::get('{user}/posts', [DashboardController::class, 'userPosts'])->name('pos
 
 
 
-
-
 // AUTH GROUP
 Route::middleware('auth')->group(function() {
     // index method inside dashboardController will handle the get request for /dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
     Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+
+    // EMAIL Verification Notice Route
+    Route::get('/email/verify', [AuthController::class, 'verifyNotice'])->name('verification.notice');
+    // name is importante the default as laravel uses it
+
+    // EMAIL Verification Handler Route
+    Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
+
 });
+
+
 
 
 
