@@ -34,9 +34,10 @@ class AuthController extends Controller
 
         event(new Registered($user));
 
-        // REDIRECT
-        return redirect()->route('home');
+        // REDIRECT 12.46
+        return redirect()->route('dashboard');
     }
+
 
     // email Verify Notice handler
     public function verifyNotice () {

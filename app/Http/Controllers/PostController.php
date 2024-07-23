@@ -20,7 +20,7 @@ class PostController extends Controller implements HasMiddleware
     {
         // method 'store' has the middleware log
         return [
-            new Middleware('auth', except: ['index', 'show']),
+            new Middleware(['auth', 'verified'], except: ['index', 'show']),
         ];
     }
 
