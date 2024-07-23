@@ -11,9 +11,11 @@ class Post extends Model
     use HasFactory;
 
     // details can be seen on migration/create_post table
+    // added 'image' > then migration create_posts > $table->string('image')->nullable();
     protected $fillable = [
         'title',
         'body',
+        'image',
     ];
 
     // 2nd relation

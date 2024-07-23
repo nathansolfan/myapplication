@@ -55,25 +55,33 @@ class PostController extends Controller implements HasMiddleware
     {
         // Posts created at dashboard.blade.php
         // VALIDATE method, takes the array of the form
-        $fields = $request->validate([
+        $request->validate([
             'title' => ['required','max:255'],
             // if body => empty then it goes empty
             'body' => ['required'],
-            'image' => ['nullable','file', 'max:1000', 'mimes:png,jpg,webp']
+            'image' => ['nullable','file', 'max:5000', 'mimes:png,jpg,webp']
         ]);
 
         // Storage facade, saves into /storage.
         // Add the put and by default goes to /app folder
         // 1st argument is the name of the folder, to define the place/disk
         // and to create a symbolic link use storage:link
+
         // Store image if exist - add validation like 'image' => ['nullable'];
-        Storage::disk('public')->put('posts_image', $request->image);
-
-
+        // then save it in a var to use for the DB, use null because $path is inside IF
+        $path = null;
+        if ($request->hasFile('image')) {
+            $path = Storage::disk('public')->put('posts_image', $request->image);
+            // dd($path);
+        }
 
         // CREATE POST - create([]) instead of using [] the whole field can be used as a var
         // Post::create($fields);
-        Auth::user()->posts()->create($fields);
+        Auth::user()->posts()->create([
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $path
+        ]);
 
         // REDIRECT with() is similar to withError() and takes key and value
         // will be grabbed in the view

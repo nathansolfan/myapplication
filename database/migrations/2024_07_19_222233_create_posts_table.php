@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('body');
             // the 2 tables for the POSTs: title and body
             // to actually create - php artisan migrate
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
