@@ -67,13 +67,9 @@
     {{-- DISPLAY USER POSTS --}}
     <h2 class="font-bold mb-4">Your lastests posts:</h2>
 
-
-
     <div class="grid grid-cols-2 gap-6">
-
         {{-- from DashboardController array - [ 'posts' => $posts ] --}}
         @foreach ( $posts as $post )
-
         {{-- created the postCard.blade component and import it here--}}
         {{-- @props ARRAY (['post'])  AND :post="$post" is how an OBJECT is passed--}}
         <x-postCard :post="$post">
@@ -89,11 +85,6 @@
                 @method('DELETE')
                 <button class="bg-red-500 text-white px-2 py-1 text-xs rounded-md">Delete</button>
             </form>
-
-
-
-
-
         </x-postCard>
         @endforeach
     </div>

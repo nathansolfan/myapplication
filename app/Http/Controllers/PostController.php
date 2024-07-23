@@ -141,8 +141,16 @@ class PostController extends Controller implements HasMiddleware
      */
     public function destroy(Post $post)
     {
+        // Auth the action
         Gate::authorize('modify', $post);
-        // dd('ok');
+
+        // Delete image if exist - delete() looks for the path
+        if ($post->image) {
+            Storage::disk('public')->delete($post->image);
+
+        }
+
+        // DELETE
         $post->delete();
 
         // Redirect with back() method

@@ -53,6 +53,28 @@
     @enderror
     </div>
 
+    {{-- Display picture on the EDIT page --}}
+    @if ($post->image)
+    <div class="h-64 rounded-md mb-4 w-1/4 object-cover overflow-hidden">
+        <label>Current Photo</label>
+        <img src=" {{asset('storage/' . $post->image)}} " alt="">
+    </div>
+    @endif
+
+    {{-- File Upload Input to EDIT --}}
+
+    {{-- POST IMAGE --}}
+    <div class="mb-4">
+        <label for="image">Cover photo</label>
+        <input type="file" name="image" id="image">
+    </div>
+
+    @error('image')
+        <p class="error"> {{$message}}</p>
+    @enderror
+
+
+
     {{-- BUTTON --}}
     <button class="btn">Update</button>
 </form>

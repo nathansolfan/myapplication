@@ -3,14 +3,12 @@
 <div class="card">
 
     {{-- Display Image - points to storage/ and then comes from DB/Posts Table--}}
-    <div>
+    <div class="h-52 rounded-md mb-4 w-full object-cover overflow-hidden">
         @if ($post->image)
         <img src=" {{asset('storage/' . $post->image)}} " alt="">
         @else
         <img src=" {{asset('storage/posts_image/ta.webp')}}" alt="">
-
         @endif
-
     </div>
 
     {{-- TITLE --}}
