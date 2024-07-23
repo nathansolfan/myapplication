@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::view('/', 'posts.index')->name('home');
-Route::redirect('/', 'posts');
+Route::redirect('/', 'posts')->name('home');
 
 // php artisan route:list - connects to the PostController routes
 Route::resource('posts', PostController::class);

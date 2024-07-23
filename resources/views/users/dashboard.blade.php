@@ -5,8 +5,6 @@
     <p>You have: {{$posts->total()}} posts </p>
 
 
-
-
     {{-- CREATE FORM POST --}}
     <div class="card mb-4">
         <h2 class="font-bold mb-4">Create a new Post</h2>
@@ -22,7 +20,7 @@
         <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         {{-- like delete or $user dont work --}}
-        @method('PUT')
+        {{-- @method('POST') --}}
 
         {{-- TITLE POST  --}}
         <div class="mb-4">

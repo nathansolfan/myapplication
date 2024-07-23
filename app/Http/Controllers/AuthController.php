@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         // REDIRECT
         return redirect()->route('home');
-        dd('ok');
+        // dd('ok');
     }
 
 
