@@ -2,6 +2,17 @@
 @props(['post', 'full' => false ])
 <div class="card">
 
+    {{-- Display Image - points to storage/ and then comes from DB/Posts Table--}}
+    <div>
+        @if ($post->image)
+        <img src=" {{asset('storage/' . $post->image)}} " alt="">
+        @else
+        <img src=" {{asset('storage/posts_image/ta.webp')}}" alt="">
+
+        @endif
+
+    </div>
+
     {{-- TITLE --}}
     <h2 class="font-bold text-xl"> {{ $post->title}} </h2>
 
